@@ -50,7 +50,7 @@ class Menurol{
     public function cargar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="SELECT * FROM menurol WHERE idmenu = ".$this->getObjMenu()->getIdmenu()." AND  idrol=".$this->getObjRol()->getIdRol()  ;
+        $sql="SELECT * FROM menurol WHERE id = ".$this->getObjMenu()->getIdmenu()." AND  idrol=".$this->getObjRol()->getIdRol()  ;
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
             if($res>-1){
@@ -58,9 +58,9 @@ class Menurol{
                     $objMenu = null;
                     $objRol = null;
                     $row = $base->Registro();
-                    if($row['idmenu']!=null){
+                    if($row['id']!=null){
                         $objMenu = new Menu();
-                        $objMenu->setIdmenu($row['idmenu']);
+                        $objMenu->setIdmenu($row['id']);
                         $objMenu->cargar();
                     }
                     if($row['idrol']!=null){
@@ -85,7 +85,7 @@ class Menurol{
         $resp = false;
         $base=new BaseDatos();
         //verEstructura($this);
-        $sql="INSERT INTO menurol(idmenu, idrol) VALUES (".$this->getObjMenu()->getIdmenu().",".$this->getObjRol()->getIdRol().");";
+        $sql="INSERT INTO menurol(id, idrol) VALUES (".$this->getObjMenu()->getIdmenu().",".$this->getObjRol()->getIdRol().");";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -103,7 +103,7 @@ class Menurol{
         $base=new BaseDatos();
         $sql=" UPDATE menurol SET ";
         $sql.=" idrol = ".$this->getObjRol()->getIdRol();
-        $sql.=" WHERE idmenu =".$this->getObjMenu()->getIdmenu();
+        $sql.=" WHERE id =".$this->getObjMenu()->getIdmenu();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -120,7 +120,7 @@ class Menurol{
     public function eliminar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="DELETE FROM menurol WHERE idmenu='". $this->getObjMenu()->getIdmenu()."' AND idrol='".$this->getObjRol()->getIdRol()."'";
+        $sql="DELETE FROM menurol WHERE id='". $this->getObjMenu()->getIdmenu()."' AND idrol='".$this->getObjRol()->getIdRol()."'";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 return true;
@@ -160,9 +160,9 @@ class Menurol{
                         $objRol->cargar();
                     }
 
-                    if($row['idmenu']!=null){
+                    if($row['id']!=null){
                         $objMenu = new Menu();
-                        $objMenu->setIdmenu($row['idmenu']);
+                        $objMenu->setIdmenu($row['id']);
                         $objMenu->cargar();
                     }
 

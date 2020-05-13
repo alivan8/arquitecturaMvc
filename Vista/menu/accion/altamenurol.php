@@ -4,7 +4,7 @@ $data = data_submitted();
 
 $respuesta = false;
 
-if (isset($data['idmenu']) and isset($data['idrol'])){
+if (isset($data['id']) and isset($data['idrol'])){
 
     $objC = new AbmMenurol();
 

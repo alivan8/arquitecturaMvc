@@ -1,6 +1,5 @@
 <?php 
-include_once "../../../configuracion.php";
-$data = data_submitted();
+
 
 $respuesta = false;
 if($action=='alta'){
@@ -11,30 +10,29 @@ if($action=='alta'){
             $mensaje = " La accion  ALTA No pudo concretarse";
         }
     }
-
+    $salida['respuesta'] = $respuesta;
     if (isset($mensaje)){
 
-        $respuesta['errorMsg']=$mensaje;
+        $salida['errorMsg']=$mensaje;
 
     }
 }elseif ($action=='baja'){
-
-
-    if (isset($data['idmenu'])){
+    if (isset($data['id'])){
         $objC = new AbmMenu();
         $respuesta = $objC->baja($data);
         if (!$respuesta){
             $mensaje = " La accion  ELIMINACION No pudo concretarse";
         }
     }
+    $salida['respuesta'] = $respuesta;
     if (isset($mensaje)){
 
-        $respuesta['errorMsg']=$mensaje;
+        $salida['errorMsg']=$mensaje;
 
     }
 }elseif ($action=='editar'){
     $respuesta = false;
-    if (isset($data['idmenu'])){
+    if (isset($data['id'])){
         $objC = new AbmMenu();
         $respuesta = $objC->modificacion($data);
 
@@ -45,19 +43,19 @@ if($action=='alta'){
         }else $respuesta =true;
 
     }
-    $retorno['respuesta'] = $respuesta;
+    $salida['respuesta'] = $respuesta;
     if (isset($mensaje)){
 
-        $retorno['errorMsg']=$sms_error;
+        $salida['errorMsg']=$sms_error;
 
     }
 }elseif ($action=='listar'){
     $objControl = new AbmMenu();
     $list = $objControl->buscar($data);
-    $arreglo_salida =  array();
+    $salida =  array();
     foreach ($list as $elem ){
 
-        $nuevoElem['idmenu'] = $elem->getIdMenu();
+        $nuevoElem['id'] = $elem->getIdMenu();
         $nuevoElem["menombre"]=$elem->getMenombre();
         $nuevoElem["medescripcion"]=$elem->getMedescripcion();
         if($elem->getObjMenu()!=null){
@@ -69,7 +67,7 @@ if($action=='alta'){
         }
         $nuevoElem["medeshabilitado"]=$elem->getMedeshabilitado();
 
-        array_push($arreglo_salida,$nuevoElem);
+        array_push($salida,$nuevoElem);
     }
 }
 

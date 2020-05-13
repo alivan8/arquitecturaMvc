@@ -7,7 +7,7 @@ $objC = new AbmMenu();
 $listaMenu = $objC -> buscar(null);
 $arreglo_salida =  array();
 foreach ($list as $elem ){
-    $nuevoElem['idmenu'] = $elem->getObjMenu()->getIdMenu();
+    $nuevoElem['id'] = $elem->getObjMenu()->getIdMenu();
     $nuevoElem["menombre"]=$elem->getObjMenu()->getMenombre();
     $nuevoElem["medescripcion"]=$elem->getObjMenu()->getMedescripcion();
     $nuevoElem["idrol"]=$elem->getObjRol()->getIdRol();

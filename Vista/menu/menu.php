@@ -37,10 +37,10 @@ include_once '../estructura/encabezado.php';
 <p>Seleccione la acci&oacute;n que desea realizar.</p>
 
 <table id="dg" title="Administrador de item menu" class="easyui-datagrid" style="height:700px"
-    url="accion/listarmenu.php" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
+    url="../principal/principal.php?controller=AbmMenu&action=listar" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
             <thead>
             <tr>
-            <th field="idmenu" width="10">ID</th>
+            <th field="id" width="10">ID</th>
             <th field="menombre" width="50">Nombre</th>
             <th field="medescripcion" width="50">Descripci&oacute;n</th>
             <th field="idpadre" width="15">ID Padre</th>
@@ -87,14 +87,15 @@ include_once '../estructura/encabezado.php';
             function newUser(){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
                 $('#fm').form('clear');
-                url = 'accion/altamenu.php';
+                url = '../principal/principal.php?controller=AbmMenu&action=alta';
+
             }
             function editUser(){
                 var row = $('#dg').datagrid('getSelected');
                 if (row){
                     $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Menu');
                     $('#fm').form('load',row);
-                    url = 'accion/editmenu.php?accion=mod&idmenu='+row.idmenu;
+                    url = '../principal/principal.php?controller=AbmMenu&action=editar&id='+row.id;
                 }
             }
             function saveUser(){
@@ -125,10 +126,9 @@ include_once '../estructura/encabezado.php';
                 if (row){
                     $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
                         if (r){
-                            $.post('accion/eliminarmenu.php?idmenu='+row.idmenu,{idmenu:row.id},
+                            $.post('../principal/principal.php?controller=AbmMenu&action=baja&id='+row.id,{id:row.id},
                                function(result){
-                               	 if (result.success){
-                                   	 
+                               	 if (result.respuesta){
                                     $('#dg').datagrid('reload');    // reload the user data
                                 } else {
                                     $.messager.show({    // show error message

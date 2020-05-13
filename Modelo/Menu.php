@@ -1,6 +1,6 @@
 <?php
 class Menu {
-    private $idmenu;
+    private $id;
     private $menombre ;
     private $medescripcion;
     private $ObjMenu;
@@ -13,15 +13,15 @@ class Menu {
      */
     public function getIdmenu()
     {
-        return $this->idmenu;
+        return $this->id;
     }
 
     /**
-     * @param mixed $idmenu
+     * @param mixed $id
      */
-    public function setIdmenu($idmenu)
+    public function setIdmenu($id)
     {
-        $this->idmenu = $idmenu;
+        $this->id = $id;
     }
 
     /**
@@ -105,7 +105,7 @@ class Menu {
     }
 
     public function __construct(){
-         $this->idmenu="";
+         $this->id="";
          $this->menombre="" ;
          $this->medescripcion="";
          $this->ObjMenu= null;
@@ -114,8 +114,8 @@ class Menu {
         
      }
 
-     public function setear($idmenu, $menombre,$medescripcion,$ObjMenu,$medeshabilitado)    {
-        $this->setIdmenu($idmenu);
+     public function setear($id, $menombre,$medescripcion,$ObjMenu,$medeshabilitado)    {
+        $this->setIdmenu($id);
         $this->setMenombre($menombre);
         $this->setMedescripcion($medescripcion);
         $this->setObjMenu($ObjMenu);
@@ -126,7 +126,7 @@ class Menu {
     public function cargar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="SELECT * FROM menu WHERE idmenu = ".$this->getIdmenu();
+        $sql="SELECT * FROM menu WHERE id = ".$this->getIdmenu();
       //  echo $sql;
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
@@ -139,7 +139,7 @@ class Menu {
                         $objMenuPadre->setIdmenu($row['idpadre']);
                         $objMenuPadre->cargar();
                     }
-                    $this->setear($row['idmenu'], $row['menombre'],$row['medescripcion'],$objMenuPadre,$row['medeshabilitado']); 
+                    $this->setear($row['id'], $row['menombre'],$row['medescripcion'],$objMenuPadre,$row['medeshabilitado']);
                     
                 }
             }
@@ -191,7 +191,7 @@ class Menu {
              $sql.= ",medeshabilitado='".$this->getMedeshabilitado()."'";
          else
               $sql.=" ,medeshabilitado=null";
-        $sql.= " WHERE idmenu = ".$this->getIdmenu();
+        $sql.= " WHERE id = ".$this->getIdmenu();
         // echo $sql;
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
@@ -209,7 +209,7 @@ class Menu {
     public function eliminar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="DELETE FROM menu WHERE idmenu =".$this->getIdmenu();
+        $sql="DELETE FROM menu WHERE id =".$this->getIdmenu();
        // echo $sql;
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
@@ -243,7 +243,7 @@ class Menu {
                         $objMenuPadre->setIdmenu($row['idpadre']);
                         $objMenuPadre->cargar();
                     }
-                    $obj->setear($row['idmenu'], $row['menombre'],$row['medescripcion'],$objMenuPadre,$row['medeshabilitado']); 
+                    $obj->setear($row['id'], $row['menombre'],$row['medescripcion'],$objMenuPadre,$row['medeshabilitado']);
                     array_push($arreglo, $obj);
                 }
                 

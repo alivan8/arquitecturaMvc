@@ -8,6 +8,9 @@ $salida =null;
         case 'AbmEvento':
             require_once "../../controladores/evento.php";
             break;
+        case 'AbmMenu':
+            require_once "../../controladores/menu.php";
+            break;
 
     }
     return $salida;
@@ -22,6 +25,9 @@ function call2($controller, $action,$data,$id){
         case 'AbmEvento':
             require_once "../../controladores/evento.php";
             break;
+        case 'AbmMenu':
+            require_once "../../controladores/menu.php";
+            break;
 
     }
     return $salida;
@@ -32,7 +38,8 @@ function call2($controller, $action,$data,$id){
 
 $controllers = array(
     'pages'=>['principal1'],
-    'AbmEvento'=>['alta','baja','editar','listar']
+    'AbmEvento'=>['alta','baja','editar','listar'],
+    'AbmMenu'=>['alta','baja','editar','listar']
 );
 
 if (array_key_exists($controller,$controllers)){

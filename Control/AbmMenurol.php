@@ -12,9 +12,9 @@ class AbmMenurol{
             $objRol->cargar();
         }
 
-        if( array_key_exists('idmenu',$param) && $param['idmenu']!=null){
+        if( array_key_exists('id',$param) && $param['id']!=null){
             $objMenu = new Menu();
-            $objMenu->setIdmenu($param['idmenu']);
+            $objMenu->setIdmenu($param['id']);
             $objMenu->cargar();
         }
 
@@ -28,7 +28,7 @@ class AbmMenurol{
     private function cargarObjetoConClave($param){
 
         $objMenuRol = null;
-        if( isset($param['idmenu']) && isset($param['idrol']) ){
+        if( isset($param['id']) && isset($param['idrol']) ){
             $objMenuRol = new Menurol();
             $objMenuRol->setear($objMenu, $objRol);
         }
@@ -38,7 +38,7 @@ class AbmMenurol{
     private function seteadosCamposClaves($param){
 
         $resp = false;
-        if (isset($param['idmenu']) && isset($param['idrol'])){
+        if (isset($param['id']) && isset($param['idrol'])){
             $resp = true;
         }
 
@@ -92,8 +92,8 @@ class AbmMenurol{
     public function buscar($param){
         $where = " true ";
         if ($param<>NULL){
-            if  (isset($param['idmenu']))
-                $where.=" and idmenu='".$param['idmenu']."'";
+            if  (isset($param['id']))
+                $where.=" and id='".$param['id']."'";
             if  (isset($param['idrol']))
                 $where.=" and idrol ='".$param['idrol']."'";
         }

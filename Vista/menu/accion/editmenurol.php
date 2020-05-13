@@ -3,7 +3,7 @@ include_once "../../../configuracion.php";
 $data = data_submitted();
 
 $respuesta = false;
-if (isset($data['idmenu'])){
+if (isset($data['id'])){
     $objC = new AbmMenurol();
     $respuesta = $objC->modificacion($data);
 
