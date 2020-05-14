@@ -11,9 +11,6 @@ if(!isset($_GET['controller']) && !isset($_GET['action'])){
     $data = data_submitted();
     $controller = $_GET['controller'];
     $action = $_GET['action'];
-    if($action =='editar' or $action =='baja'){
-        $id = $_GET['id'];
-    }
     if ($_GET['action']=='listar'){
         $bandera= true;
     }

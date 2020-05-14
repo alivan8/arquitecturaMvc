@@ -19,7 +19,7 @@ $listaMenu = $objC -> buscar(null);
 $otroCombo = '<select class="easyui-combobox"  id="id"  name="id" label="Menu:" labelPosition="top" style="width:50%;">
 <option></option>';
 foreach ($listaMenu as $menu){
-        $otroCombo .='<option value="'.$menu->getIdMenu().'">'.$menu->getIdMenu().':'.$menu->getMenombre().'</option>';
+    $otroCombo .='<option value="'.$menu->getIdMenu().'">'.$menu->getIdMenu().':'.$menu->getMenombre().'</option>';
 }
 $otroCombo .='</select>';
 ?>
@@ -50,10 +50,10 @@ include_once '../estructura/encabezado.php';
        url="accion/listarmenurol.php" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
-        <th field="id" width="10">ID</th>
+        <th field="idmenu" width="10">ID</th>
         <th field="menombre" width="50">Nombre</th>
         <th field="medescripcion" width="50">Descripci&oacute;n</th>
-        <th field="idrol" width="10">ID</th>href="../usuarios/abmrol.php
+        <th field="idrol" width="10">ID</th>
         <th field="rodescripcion" width="50">Rol</th>
     </tr>
     </thead>
@@ -87,14 +87,14 @@ include_once '../estructura/encabezado.php';
     function newUser(){
         $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
         $('#fm').form('clear');
-        url = 'accion/altamenurol.php';
+        url = '../principal/principal.php?controller=AbmMenurol&action=alta';
     }
     function editUser(){
         var row = $('#dg').datagrid('getSelected');
         if (row){
             $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Menu');
             $('#fm').form('load',row);
-            url = 'accion/editmenurol.php?accion=mod&id='+row.id;
+            url = '../principal/principal.php?controller=AbmMenurol&action=editar&id='+row.id;
         }
     }
     function saveUser(){
@@ -125,7 +125,7 @@ include_once '../estructura/encabezado.php';
         if (row){
             $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
                 if (r){
-                    $.post('accion/eliminarmenurol.php?id='+row.id+'&idrol='+row.idrol,{id:row.id},
+                    $.post('../principal/principal.php?controller=AbmMenurol&action=baja&id='+row.id+'&idrol='+row.idrol,{id:row.id},
                         function(result){
                             if (result.respuesta){
 
