@@ -51,7 +51,7 @@ class Usuariorol {
     public function cargar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="SELECT * FROM usuariorol WHERE idusuario= ". $this->getObjUsuario()->getIdusuario()." AND idrol= ". $this->getObjRol()->getIdrol();
+        $sql="SELECT * FROM usuariorol WHERE id= ". $this->getObjUsuario()->getIdusuario()." AND idrol= ". $this->getObjRol()->getIdrol();
 
         if ($base->Iniciar()) {
 
@@ -69,10 +69,10 @@ class Usuariorol {
                         $objRol->cargar();
                     }
 
-                    if ($row['idusuario']!=null){
+                    if ($row['id']!=null){
 
                         $objUsuario = new Usuario();
-                        $objUsuario->setIdusuario($row['idusuario']);
+                        $objUsuario->setIdusuario($row['id']);
                         $objUsuario->cargar();
                     }
                     $this->setear($objUsuario, $objRol) ;
@@ -89,7 +89,7 @@ class Usuariorol {
         $resp = false;
         $base=new BaseDatos();
 
-        $sql="INSERT INTO usuariorol(idusuario, idrol)VALUES(".$this->getObjUsuario()->getIdusuario().",".$this->getObjRol()->getIdrol().");";
+        $sql="INSERT INTO usuariorol(id, idrol)VALUES(".$this->getObjUsuario()->getIdusuario().",".$this->getObjRol()->getIdrol().");";
         //echo $sql;
         if ($base->Iniciar()) {
 
@@ -110,7 +110,7 @@ class Usuariorol {
         $base=new BaseDatos();
         $sql=" UPDATE usuariorol SET ";
         $sql.=" idrol = ".$this->getObjRol()->getIdRol();
-        $sql.=" WHERE idusuario =".$this->getObjUsuario()->getIdusuario();
+        $sql.=" WHERE id =".$this->getObjUsuario()->getIdusuario();
 
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
@@ -128,7 +128,7 @@ class Usuariorol {
     public function eliminar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="DELETE FROM usuariorol WHERE idusuario='". $this->getObjUsuario()->getIdusuario()."' AND idrol='".$this->getObjRol()->getIdRol()."'";
+        $sql="DELETE FROM usuariorol WHERE id='". $this->getObjUsuario()->getIdusuario()."' AND idrol='".$this->getObjRol()->getIdRol()."'";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 return true;
@@ -163,9 +163,9 @@ class Usuariorol {
                         $objRol->cargar();
                     }
 
-                    if($row['idusuario']!=null){
+                    if($row['id']!=null){
                         $objUsuario = new Usuario();
-                        $objUsuario->setIdusuario($row['idusuario']);
+                        $objUsuario->setIdusuario($row['id']);
                         $objUsuario->cargar();
                     }
 

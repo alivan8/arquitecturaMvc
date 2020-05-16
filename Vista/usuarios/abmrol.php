@@ -30,10 +30,10 @@ include_once '../estructura/encabezado.php';
 <p>Seleccione la acci&oacute;n que desea realizar.</p>
 
 <table id="dg" title="Administrador de Roles" class="easyui-datagrid" style="height:500px"
-       url="accion/listarrol.php" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
+       url="../principal/principal.php?controller=AbmRol&action=listar" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
-        <th field="idrol" width="10">ID</th>
+        <th field="id" width="10">ID</th>
         <th field="rodescripcion" width="25">Descripcion</th>
     </tr>
     </thead>
@@ -62,14 +62,14 @@ include_once '../estructura/encabezado.php';
     function newUser(){
         $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Usuario');
         $('#fm').form('clear');
-        url = 'accion/altarol.php';
+        url = '../principal/principal.php?controller=AbmRol&action=alta';
     }
     function editUser(){
         var row = $('#dg').datagrid('getSelected');
         if (row){
             $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
             $('#fm').form('load',row);
-            url = 'accion/editarrol.php?accion=mod&idrol='+row.idrol;
+            url = '../principal/principal.php?controller=AbmRol&action=editar&id='+row.id;
         }
     }
     function saveUser(){
@@ -100,7 +100,7 @@ include_once '../estructura/encabezado.php';
         if (row){
             $.messager.confirm('Confirm','Seguro que desea eliminar el rol?', function(r){
                 if (r){
-                    $.post('accion/bajarol.php?idrol='+row.idrol,{idrol:row.id},
+                    $.post('../principal/principal.php?controller=AbmRol&action=baja&id='+row.id,{id:row.id},
                         function(result){
                             if (result.respuesta){
 

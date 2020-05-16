@@ -10,7 +10,7 @@ class AbmUsuario{
         
         $objUsuario = null;
 
-        if( array_key_exists('idusuario',$param) and array_key_exists('usnombre',$param) and array_key_exists('uspass',$param) and array_key_exists('usmail',$param)){
+        if( array_key_exists('id',$param) and array_key_exists('usnombre',$param) and array_key_exists('uspass',$param) and array_key_exists('usmail',$param)){
             $objUsuario = new Usuario();
 
             $param['uspass'] = md5($param['uspass']);
@@ -20,7 +20,7 @@ class AbmUsuario{
             }else{
                 $param['usdeshabilitado'] = null;
             }
-            $objUsuario->setear($param['idusuario'], $param['usnombre'],$param['uspass'], $param['usmail'], $param['usdeshabilitado']);
+            $objUsuario->setear($param['id'], $param['usnombre'],$param['uspass'], $param['usmail'], $param['usdeshabilitado']);
         }
         return $objUsuario;
     }
@@ -34,9 +34,9 @@ class AbmUsuario{
         
         $objUsuario = null;
         
-        if( isset($param['idusuario']) ){
+        if( isset($param['id']) ){
             $objUsuario = new Usuario();
-            $objUsuario->setear($param['idusuario'], "", "", "", "");
+            $objUsuario->setear($param['id'], "", "", "", "");
         }
         return $objUsuario;
     }
@@ -49,7 +49,7 @@ class AbmUsuario{
     
     private function seteadosCamposClaves($param){
         $resp = false;
-        if (isset($param['idusuario']))
+        if (isset($param['id']))
             $resp = true;
             return $resp;
     }
@@ -61,7 +61,7 @@ class AbmUsuario{
      */
     public function alta($param){
         $resp = false;
-        $param['idusuario'] =null;
+        $param['id'] =null;
         $elObjtUsuario = $this->cargarObjeto($param);
         if ($elObjtUsuario!=null and $elObjtUsuario->insertar()){
             $resp = true;
@@ -109,8 +109,8 @@ class AbmUsuario{
     public function buscar($param){
                                                                                                 $where = " true ";
         if ($param<>NULL){
-            if  (isset($param['idusuario']))
-                $where.=" and idusuario =".$param['idusuario'];
+            if  (isset($param['id']))
+                $where.=" and id =".$param['id'];
             if  (isset($param['usnombre']))
                 $where.=" and usnombre ='".$param['usnombre']."'";
             if  (isset($param['uspass']))

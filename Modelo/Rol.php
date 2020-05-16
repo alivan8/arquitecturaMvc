@@ -1,24 +1,24 @@
 <?php
 class Rol{
 
-    private $idrol;
+    private $id;
     private $rodescripcion;
     private $mensajeoperacion;
 
 
     public function __construct()
     {
-        $this->idrol='';
+        $this->id='';
         $this->rodescripcion='';
 
     }
 
     public function getIdRol(){
-        return $this->idrol;
+        return $this->id;
     }
 
     public function setIdRol($valor){
-        $this->idrol=$valor;
+        $this->id=$valor;
     }
 
     public function getRoDescripcion(){
@@ -37,20 +37,20 @@ class Rol{
         $this->mensajeoperacion=$valor;
     }
 
-    public function setear($idrol,$roldescripcion){
-        $this->idrol=$idrol;
+    public function setear($id,$roldescripcion){
+        $this->id=$id;
         $this->rodescripcion=$roldescripcion;
     }
     public function cargar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="SELECT * FROM rol WHERE idrol = ".$this->getIdRol();
+        $sql="SELECT * FROM rol WHERE id = ".$this->getIdRol();
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
             if($res>-1){
                 if($res>0){
                     $row = $base->Registro();
-                    $this->setear($row['idrol'], $row['rodescripcion']);
+                    $this->setear($row['id'], $row['rodescripcion']);
                 }
             }
         } else {
@@ -79,7 +79,7 @@ class Rol{
     public function modificar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="UPDATE rol SET rodescripcion='".$this->getRoDescripcion()."'  WHERE idrol =".$this->getIdRol();
+        $sql="UPDATE rol SET rodescripcion='".$this->getRoDescripcion()."'  WHERE id =".$this->getIdRol();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -96,7 +96,7 @@ class Rol{
     public function eliminar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="DELETE FROM rol WHERE idrol =".$this -> getIdRol();
+        $sql="DELETE FROM rol WHERE id =".$this -> getIdRol();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -121,7 +121,7 @@ class Rol{
             if($res>0){
                 while ($row = $base->Registro()){
                     $obj= new Rol();
-                    $obj->setear($row['idrol'], $row['rodescripcion']);
+                    $obj->setear($row['id'], $row['rodescripcion']);
                     array_push($arreglo, $obj);
                 }
             }

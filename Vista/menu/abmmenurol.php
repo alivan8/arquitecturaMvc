@@ -47,7 +47,7 @@ include_once '../estructura/encabezado.php';
 <p>Seleccione la acci&oacute;n que desea realizar.</p>
 
 <table id="dg" title="Administrador de item menu" class="easyui-datagrid" style="height:700px"
-       url="accion/listarmenurol.php" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
+       url="../principal/principal.php?controller=AbmMenurol&action=listar" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
         <th field="idmenu" width="10">ID</th>

@@ -14,21 +14,28 @@ function call($controller,$action,$data){
         case 'AbmMenurol':
             require_once "../../controladores/menurolController.php";
             break;
+        case 'AbmRol':
+            require_once "../../controladores/rolController.php";
+            break;
+        case 'AbmUsuario':
+            require_once "../../controladores/usuarioController.php";
+
+            break;
+        case 'AbmUsuariorol':
+            require_once "../../controladores/rolusuarioController.php";
+            break;
 
     }
     return $salida;
 }
-
-
-
-
-
-
 $controllers = array(
     'pages'=>['principal1'],
     'AbmEvento'=>['alta','baja','editar','listar'],
     'AbmMenu'=>['alta','baja','editar','listar'],
-    'AbmMenurol'=>['alta','baja','editar','listar']
+    'AbmMenurol'=>['alta','baja','editar','listar'],
+    'AbmRol'=>['alta','baja','editar','listar'],
+    'AbmUsuario'=>['alta','baja','editar','listar'],
+    'AbmUsuariorol'=>['alta','baja','editar','listar']
 );
 
 if (array_key_exists($controller,$controllers)){

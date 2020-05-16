@@ -13,9 +13,9 @@ class AbmUsuariorol{
             $objRol->cargar();
         }
 
-        if( array_key_exists('idusuario',$param) && $param['idusuario']!=null){
+        if( array_key_exists('id',$param) && $param['id']!=null){
             $objUsuario = new Usuario();
-            $objUsuario->setIdusuario($param['idusuario']);
+            $objUsuario->setIdusuario($param['id']);
             $objUsuario->cargar();
         }
 
@@ -27,7 +27,7 @@ class AbmUsuariorol{
 
     private function cargarObjetoConClave($param){
         $objUsuarioRol = null;
-        if( isset($param['idusuario']) && isset($param['idrol']) ){
+        if( isset($param['id']) && isset($param['idrol']) ){
             $objUsuarioRol = new UsuarioRol();
             $objUsuarioRol->setear($objUsuario, $objRol);
         }
@@ -37,7 +37,7 @@ class AbmUsuariorol{
     private function seteadosCamposClaves($param){
 
         $resp = false;
-        if (isset($param['idusuario']) && isset($param['idrol'])){
+        if (isset($param['id']) && isset($param['idrol'])){
             $resp = true;
         }
 
@@ -92,8 +92,8 @@ class AbmUsuariorol{
     public function buscar($param){
         $where = " true ";
         if ($param<>NULL){
-            if  (isset($param['idusuario']))
-                $where.=" and idusuario=".$param['idusuario'];
+            if  (isset($param['id']))
+                $where.=" and id=".$param['id'];
             if  (isset($param['idrol']))
                 $where.=" and idrol =".$param['idrol'];
         }

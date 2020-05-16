@@ -2,7 +2,7 @@
 include_once "../../configuracion.php";
 $objControl = new AbmUsuario();
 $listaUsuario = $objControl->buscar(null);
-$combo = '<select class="easyui-combobox"  id="idusuario"  name="idusuario" label="Usuario" labelPosition="top" style="width:90%;">
+$combo = '<select class="easyui-combobox"  id="id"  name="id" label="Usuario" labelPosition="top" style="width:90%;">
 <option></option>';
 foreach ($listaUsuario as $objUsuario){
     $combo .='<option value="'.$objUsuario->getIdusuario().'">'.$objUsuario->getUsnombre().':'.$objUsuario->getUspass().'</option>';
@@ -36,10 +36,10 @@ include_once '../estructura/encabezado.php';
 <p>Seleccione la acci&oacute;n que desea realizar.</p>
 
 <table id="dg" title="Administrador de Usuarios" class="easyui-datagrid" style="width:1200px;height:500px"
-    url="accion/listarusuarios.php" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
+       url="../principal/principal.php?controller=AbmUsuario&action=listar" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
             <thead>
             <tr>
-            <th field="idusuario" width="10">ID</th>
+            <th field="id" width="10">ID</th>
             <th field="usnombre" width="25">Nombre</th>
             <th field="uspass" width="50">Password</th>
             <th field="usmail" width="25">e-mail</th>
@@ -81,14 +81,14 @@ include_once '../estructura/encabezado.php';
             function newUser(){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Usuario');
                 $('#fm').form('clear');
-                url = 'accion/altausuario.php';
+                url = '../principal/principal.php?controller=AbmUsuario&action=alta';
             }
             function editUser(){
                 var row = $('#dg').datagrid('getSelected');
                 if (row){
                     $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
                     $('#fm').form('load',row);
-                    url = 'accion/editarusuario.php?accion=mod&idusuario='+row.idusuario;
+                    url = '../principal/principal.php?controller=AbmUsuario&action=editar&id='+row.id;
                 }
             }
             function saveUser(){
@@ -119,7 +119,8 @@ include_once '../estructura/encabezado.php';
                 if (row){
                     $.messager.confirm('Confirm','Seguro que desea eliminar el usuario?', function(r){
                         if (r){
-                            $.post('accion/bajausuario.php?idusuario='+row.idusuario,{idusuario:row.id},
+                            //$.post('accion/bajausuario.php?id='+row.id,{id:row.id},
+                            $.post('../principal/principal.php?controller=AbmUsuario&action=baja&id='+row.id,{id:row.id},
                                function(result){
                                  if (result.respuesta){
                                      

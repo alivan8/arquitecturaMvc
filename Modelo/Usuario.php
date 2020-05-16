@@ -1,7 +1,7 @@
 <?php 
 class Usuario{
     
-    private $idusuario;
+    private $id;
     private $usnombre;
     private $uspass;
     private $usmail;
@@ -9,7 +9,7 @@ class Usuario{
     private $mensajeoperacion;
     
     public function __construct(){
-        $this -> idusuario="";
+        $this -> id="";
         $this -> usnombre="";
         $this -> uspass="";
         $this -> usmail="";
@@ -21,7 +21,7 @@ class Usuario{
     
     public function getIdusuario()
     {
-        return $this->idusuario;
+        return $this->id;
     }
 
     public function getUsnombre()
@@ -51,9 +51,9 @@ class Usuario{
 
     // Metodos de acceso SET
     
-    public function setIdusuario($idusuario)
+    public function setIdusuario($id)
     {
-        $this->idusuario = $idusuario;
+        $this->id = $id;
     }
 
     public function setUsnombre($usnombre)
@@ -81,8 +81,8 @@ class Usuario{
         $this->mensajeoperacion = $mensajeoperacion;
     }
 
-    public function setear($idusuario, $usnombre, $uspass, $usmail, $usdeshabilitado){
-        $this -> idusuario=$idusuario;
+    public function setear($id, $usnombre, $uspass, $usmail, $usdeshabilitado){
+        $this -> id=$id;
         $this -> usnombre=$usnombre;
         $this -> uspass=$uspass;
         $this -> usmail=$usmail;
@@ -92,13 +92,13 @@ class Usuario{
     public function cargar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="SELECT * FROM usuario WHERE idusuario = ".$this->getIdusuario();
+        $sql="SELECT * FROM usuario WHERE id = ".$this->getIdusuario();
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
             if($res>-1){
                 if($res>0){
                     $row = $base->Registro();
-                    $this->setear($row['idusuario'], $row['usnombre'], $row['uspass'], $row['usmail'], $row['usdeshabilitado']);
+                    $this->setear($row['id'], $row['usnombre'], $row['uspass'], $row['usmail'], $row['usdeshabilitado']);
                 }
             }
         } else {
@@ -139,7 +139,7 @@ class Usuario{
             $sql.=", usdeshabilitado= NULL ";
 
         }
-        $sql.=" WHERE idusuario =".$this->getIdusuario();
+        $sql.=" WHERE id =".$this->getIdusuario();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -155,7 +155,7 @@ class Usuario{
     public function eliminar(){
         $resp = false;
         $base=new BaseDatos();
-        $sql="DELETE FROM usuario WHERE idusuario =".$this -> getIdusuario();
+        $sql="DELETE FROM usuario WHERE id =".$this -> getIdusuario();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -181,7 +181,7 @@ class Usuario{
             if($res>0){
                 while ($row = $base->Registro()){
                     $obj= new Usuario();
-                    $obj->setear($row['idusuario'], $row['usnombre'], $row['uspass'], $row['usmail'], $row['usdeshabilitado']);
+                    $obj->setear($row['id'], $row['usnombre'], $row['uspass'], $row['usmail'], $row['usdeshabilitado']);
                     array_push($arreglo, $obj);
                 }
             }

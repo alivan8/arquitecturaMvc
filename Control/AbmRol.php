@@ -11,9 +11,9 @@ class AbmRol{
     private function cargarObjeto($param){
         $obj = null;
 
-        if( array_key_exists('idrol',$param) and array_key_exists('rodescripcion',$param)){
+        if( array_key_exists('id',$param) and array_key_exists('rodescripcion',$param)){
             $obj = new Rol();
-            $obj->setear($param['idrol'], $param['rodescripcion']);
+            $obj->setear($param['id'], $param['rodescripcion']);
         }
         return $obj;
     }
@@ -21,23 +21,23 @@ class AbmRol{
     private function cargarObjetoConClave($param){
         $obj = null;
 
-        if( isset($param['idrol']) ){
+        if( isset($param['id']) ){
             $obj = new Rol();
-            $obj->setear($param['idrol'], null);
+            $obj->setear($param['id'], null);
         }
         return $obj;
     }
 
     private function seteadosCamposClaves($param){
         $resp = false;
-        if (isset($param['idrol']))
+        if (isset($param['id']))
             $resp = true;
         return $resp;
     }
 
     public function alta($param){
         $resp = false;
-        $param['idrol'] =null;
+        $param['id'] =null;
         $elObjtRol = $this->cargarObjeto($param);
         //        verEstructura($elObjtTabla);
         if ($elObjtRol!=null and $elObjtRol->insertar()){
@@ -74,8 +74,8 @@ class AbmRol{
     public function buscar($param){
         $where = " true ";
         if ($param<>NULL){
-            if  (isset($param['idrol']))
-                $where.=" and idrol =".$param['idrol'];
+            if  (isset($param['id']))
+                $where.=" and id =".$param['id'];
             if  (isset($param['rodescripcion']))
                 $where.=" and rodescripcion ='".$param['rodescripcion']."'";
         }
