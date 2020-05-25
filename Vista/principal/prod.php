@@ -2,8 +2,8 @@
 
 include_once '../../configuracion.php';
 
-if(!empty($_GET['idevento'])){
-    $id=$_GET['idevento'];
+if(!empty($_GET['id'])){
+    $id=$_GET['id'];
 
     $param=['id'=>$id];
 
