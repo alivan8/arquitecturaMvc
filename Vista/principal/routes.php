@@ -1,5 +1,5 @@
 <?php
-function call($controller,$action,$data){
+function call($controller,$action,$data,$id){
     $salida =null;
     switch ($controller){
         case 'pages':
@@ -19,10 +19,12 @@ function call($controller,$action,$data){
             break;
         case 'AbmUsuario':
             require_once "../../controladores/usuarioController.php";
-
             break;
         case 'AbmUsuariorol':
             require_once "../../controladores/rolusuarioController.php";
+            break;
+        case 'AbmInscripcion':
+            require_once "../../controladores/isncripcionController.php";
             break;
 
     }
@@ -35,12 +37,13 @@ $controllers = array(
     'AbmMenurol'=>['alta','baja','editar','listar'],
     'AbmRol'=>['alta','baja','editar','listar'],
     'AbmUsuario'=>['alta','baja','editar','listar'],
-    'AbmUsuariorol'=>['alta','baja','editar','listar']
+    'AbmUsuariorol'=>['alta','baja','editar','listar'],
+    'AbmInscripcion'=>['alta','baja','listar']
 );
 
 if (array_key_exists($controller,$controllers)){
     if(in_array($action,$controllers[$controller])){
-            $salida = call($controller, $action, $data);
+        $salida = call($controller, $action, $data,$id);
     }else{
         /////
         echo "error";

@@ -1,26 +1,30 @@
 <?php
 include_once "../../configuracion.php";
-$salida= null;
-$id =0;
-$bandera= false;
-if(!isset($_GET['controller']) && !isset($_GET['action'])){
+$salida = null;
+$id = 0;
+$bandera = false;
+if (!isset($_GET['controller']) && !isset($_GET['action'])) {
     $controller = 'pages';
     $action = 'principal1';
     $data = null;
-}else{
+} else {
     $data = data_submitted();
     $controller = $_GET['controller'];
     $action = $_GET['action'];
-    if ($_GET['action']=='listar'){
-        $bandera= true;
+    if($controller=='AbmInscripcion'){
+        $id = $_GET['id'];
+    }
+    if ($_GET['action'] == 'listar') {
+        $bandera = true;
     }
 }
 
 require_once("routes.php");
-if ($bandera == 'true'){
-      echo json_encode($salida,null,2);
-}else{
+if (isset($salida['is_require'])) {
+    require_once($salida['require']);
+} elseif ($bandera == 'true') {
+    echo json_encode($salida, null, 2);
+} else {
     echo json_encode($salida);
 }
-
 ?>

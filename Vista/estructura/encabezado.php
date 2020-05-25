@@ -150,10 +150,17 @@ function esPadre($menu,$arreglo){
                     } else {
                         if ($menu->getObjMenu() == null and $menu -> getMedeshabilitado() == null) {
                             ?>
+                            <?php if ($menu->getMenombre() == 'inscripcions') : ?>
+                                <!-- <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="redirigir()" style="width:90px">Aceptar</a>-->
+                                <a type="button" href="../principal/principal.php?controller=AbmInscripcion&action=listar&id=0"  value="inscripcion">inscripcion</a>
+
+
+                            <?php else: ?>
                             <li class="nav-item">
                                 <a class="py-2 d-none d-md-inline-block "
                                    href="../<?php echo $menu->getMenombre() ?>/<?php echo $menu->getMenombre() . '.php' ?>"><?php echo ucfirst($menu->getMenombre()); ?></a>
                             </li>
+                            <?php endif; ?>
                             <?php
                         }
                     }

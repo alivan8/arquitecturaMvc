@@ -31,46 +31,45 @@ $inscripcions=$admin->inscripcionsPendientes();
         </thead>
         <tbody>
         <?php
-            foreach($inscripcions as $inscripcion){
-                $estadoinscripcion=$admin->verificaEstadoinscripcion($inscripcion->getidinscripcion());
-                ?>
-                <tr class="<?php if($estadoinscripcion==4){echo 'table-danger';} elseif ($estadoinscripcion==2){echo 'table-success';} ?>">
+        foreach($inscripcions as $inscripcion){
+            $estadoinscripcion=$admin->verificaEstadoinscripcion($inscripcion->getidinscripcion());
+            ?>
+            <tr class="<?php if($estadoinscripcion==4){echo 'table-danger';} elseif ($estadoinscripcion==2){echo 'table-success';} ?>">
 
-                    <td><?php echo $inscripcion->getidinscripcion();?></td>
-                    <td><?php echo $inscripcion->getObjUsuario()->getUsnombre();?></td>
-                    <td><?php echo $inscripcion->getObjUsuario()->getUsmail();?></td>
-                    <td><?php echo $inscripcion->getCofecha();?></td>
-                    <td><?php echo $estadoinscripcion;?></td>
+                <td><?php echo $inscripcion->getidinscripcion();?></td>
+                <td><?php echo $inscripcion->getObjUsuario()->getUsnombre();?></td>
+                <td><?php echo $inscripcion->getObjUsuario()->getUsmail();?></td>
+                <td><?php echo $inscripcion->getCofecha();?></td>
+                <td><?php echo $estadoinscripcion;?></td>
 
-                    <?php
+                <?php
 
-                    // si la inscripcion ya fue cancelada
-                     if($estadoinscripcion==4 or $estadoinscripcion==2){
+                // si la inscripcion ya fue cancelada
+                if($estadoinscripcion==4 or $estadoinscripcion==2){
 
-                         ?>
-                         <td><button class="btn btn-info btn-sm"><a style="color: white" href="..l/pdf/detalles.php?idinscripcion=<?php echo $inscripcion->getidinscripcion();?>">Detalles</a></button></td>
-                    <?php
-
-                     }if($admin->verificaEstadoinscripcion($inscripcion->getidinscripcion())==3 ){
-                         ?>
-                        <td><button class="btn btn-info btn-sm"><a style="color: white" href="../principal/pdf/detalles.php?idinscripcion=<?php echo $inscripcion->getidinscripcion();?>">Detalles</a></button></td>
-                         <td><button class="btn btn-danger btn-sm" data-inscripcioncan="<?php echo $inscripcion->getidinscripcion();?>">Cancelar</button></td>
-                         <td><button class="btn btn-success btn-sm" data-inscripcionacep="<?php echo $inscripcion->getidinscripcion();?>">Aceptar</button></td>
-                    <?php
-
-                     }
                     ?>
+                    <td><button class="btn btn-info btn-sm"><a style="color: white" href="..l/pdf/detalles.php?idinscripcion=<?php echo $inscripcion->getidinscripcion();?>">Detalles</a></button></td>
+                    <?php
+
+                }if($admin->verificaEstadoinscripcion($inscripcion->getidinscripcion())==3 ){
+                    ?>
+                    <td><button class="btn btn-danger btn-sm" data-inscripcioncan="<?php echo $inscripcion->getidinscripcion();?>">Cancelar</button></td>
+                    <td><button class="btn btn-success btn-sm" data-inscripcionacep="<?php echo $inscripcion->getidinscripcion();?>">Aceptar</button></td>
+                    <?php
+
+                }
+                ?>
 
 
-                </tr>
+            </tr>
 
-        <?php
-            }
+            <?php
+        }
         ?>
         </tbody>
 
     </table>
-    <hr>
+
 </div>
 <div class="modal" tabindex="-1" role="dialog" id="cancelarinscripcion">
     <div class="modal-dialog" role="document">
@@ -124,6 +123,8 @@ include_once '../estructura/pie.php';
         text: 'Thumbnail'
     });
 </script>
+
 <script src="../js/admin.js"></script>
+
 </body>
 </html>
