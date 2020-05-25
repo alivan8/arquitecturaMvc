@@ -21,6 +21,8 @@ if (!isset($_GET['controller']) && !isset($_GET['action'])) {
 
 require_once("routes.php");
 if (isset($salida['is_require'])) {
+    $inscripcions=   $salida['inscripcions'];
+     $admin=$salida['admin'];
     require_once($salida['require']);
 } elseif ($bandera == 'true') {
     echo json_encode($salida, null, 2);

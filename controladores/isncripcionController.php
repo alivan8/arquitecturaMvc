@@ -2,11 +2,9 @@
 
 $respuesta = false;
 if($action=='listar') {
-    //$admin = new Admin();
-    //$inscripcions = $admin->inscripcionsPendientes();
-    // header(location "../Inscripcions/inscripcions.php");
-    // header('Location: ../Inscripcions/inscripcions.php');
-    //require_once("../Inscripcions/inscripcions.php");
+    $admin = new Admin();
+    $salida['inscripcions'] = $admin->inscripcionsPendientes();
+    $salida['admin']=$admin;
     $salida['is_require']=true;
     $salida['require']='../Inscripcions/inscripcions.php';
 }elseif ($action=='alta'){

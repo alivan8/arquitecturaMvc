@@ -15,9 +15,6 @@
 <body>
 <?php
 include_once '../estructura/encabezado.php';
-$admin=new Admin();
-$inscripcions=$admin->inscripcionsPendientes();
-
 ?>
 <div class="container">
     <table class="table table-hover table-striped">
